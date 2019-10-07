@@ -14,7 +14,7 @@
 			<div class="row">
 				<div class="col-12">
 					<span
-						th:text="${#strings.concat('Connected in ',connection.address)}"></span>
+						th:text="${#strings.concat('Connected in ',connection_address)}"></span>
 				</div>
 			</div>
 			<div class="row">
@@ -32,7 +32,9 @@
 						<a th:href="@{/}" class="btn btn-light">Add New Collection</a>
 					</form> 
 				</div>
-				<div class="col-9"></div>
+				<div class="col-9">
+				<span th:text="${#strings.concat('Manageing ',collectionName)}"></span>
+				</div>
 			</div>
 		</div>
 	</section>

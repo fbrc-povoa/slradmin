@@ -5,8 +5,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.ArrayList;
-import java.util.List;
 
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
@@ -51,32 +49,7 @@ public class ConnectionService {
 			return false;
 		}
 	}
-
-	public List<String> collections() {
-
-		URI uri;
-		List<String> list = null;
-		try {
-			uri = new URIBuilder() //
-					.setScheme("http") //
-					.setHost(System.getProperty("solrAddress")) //
-					.setPath("/solr/admin/collections") //
-					.setParameter("action", "LIST") //
-					.setParameter("wt", "json") //
-					.build();
-			
-			JSONObject json = get(uri);
-			list = new ArrayList<>();
-			for (int i = 0; i < json.getJSONArray("collections").length(); i++) {
-				list.add(json.getJSONArray("collections").getString(i));
-			}
-		} catch (URISyntaxException | JSONException e) {
-			e.printStackTrace();
-		}
-		return list;
-
-	}
-
+	
 	public JSONObject get(URI uri) {
 
 		HttpGet httpget = new HttpGet(uri);
@@ -96,4 +69,5 @@ public class ConnectionService {
 			return null;
 		}
 	}
+
 }
