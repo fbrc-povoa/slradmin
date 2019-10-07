@@ -1,5 +1,6 @@
 package com.fbrc.slradmin.controllers;
 
+import org.json.JSONException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,8 +29,16 @@ public class ConnectController {
 	}
 	
 	@PostMapping("/connect")
-	public String connect(Model model, ConnectionDto connection) {
-		connectionService.start(connection);
-		return "connect";
+	public String connect(Model model, ConnectionDto connection) throws JSONException {
+		
+		if(connectionService.start(connection)) {
+			model.addAttribute("connection", connection);
+			model.addAttribute("collections", connectionService.collections());
+			return "connected";
+		} else {
+			model.addAttribute("connection", dto);
+			return "connect";
+		}
+		
 	}
 }

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+	layout:decorate="~{layouts/default}">
+
+<body>
+	<section layout:fragment="navbar" th:remove="tag">
+		<div th:replace="fragments/navbar :: navbar('home')" th:remove="tag"></div>
+	</section>
+	<section layout:fragment="content" th:remove="tag">
+		<div class="container-fluid">
+			<div class="col-12">
+				<div class="row">
+					<span
+						th:text="${#strings.concat('Conectado em ',connection.address)}"></span>
+				</div>
+				<div class="row">
+					<div class="col-3">
+						<select class="custom-select custom-select-lg mb-3">
+							<option th:each="opt:${collections}" th:text="${opt}"
+								th:value="${opt}"></option>
+						</select>
+					</div>
+					<div class="col-9"></div>
+				</div>
+			</div>
+		</div>
+	</section>
+</body>
+</html>
