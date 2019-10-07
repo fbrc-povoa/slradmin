@@ -1,0 +1,19 @@
+<div th:fragment="subNavbar" th:remove="tag">
+		
+		<span>Collections <small id="emailHelp"
+			class="form-text text-muted">Choose one of these and do
+				something.</small>
+		</span>
+		<form method="post" th:object="${optSelected}"
+			th:action="@{/admin/collection}">
+			<select th:field="*{value}"
+				class="custom-select custom-select-lg mb-3">
+				<option th:each="opt:${collectionsName}" th:text="${opt}"
+					th:value="${opt}"></option>
+			</select>
+			<button type="submit" class="btn btn-success">Admin
+				Collection</button>
+			<a th:href="@{/admin/collection/new}" class="btn btn-light">Add
+				New Collection</a>
+		</form>
+</div>

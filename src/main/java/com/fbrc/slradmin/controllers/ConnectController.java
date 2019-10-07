@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.fbrc.slradmin.dtos.ConnectionDto;
-import com.fbrc.slradmin.dtos.OptSelected;
+import com.fbrc.slradmin.dtos.CollectionNameSelected;
 import com.fbrc.slradmin.services.CollectionService;
 import com.fbrc.slradmin.services.ConnectionService;
 
@@ -38,9 +38,9 @@ public class ConnectController {
 	public String connect(Model model, ConnectionDto connection) throws JSONException {
 		
 		if(connectionService.start(connection)) {
-			model.addAttribute("connection", connection);
-			model.addAttribute("collections", collectionService.collectionsName());
-			model.addAttribute("optSelected", new OptSelected());
+			model.addAttribute("connection_address", connection.getAddress());
+			model.addAttribute("collectionsName", collectionService.collectionsName());
+			model.addAttribute("optSelected", new CollectionNameSelected());
 			return "connected";
 		} else {
 			model.addAttribute("connection", dto);

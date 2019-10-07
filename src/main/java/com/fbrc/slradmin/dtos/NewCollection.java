@@ -5,8 +5,8 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class OptSelected {
+public class NewCollection {
 	
-	private String value;
+	private String name;
 
 }

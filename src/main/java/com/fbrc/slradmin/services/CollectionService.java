@@ -57,4 +57,33 @@ public class CollectionService {
 	public String getCurrentAddress() {
 		return System.getProperty("solrAddress");
 	}
+	
+	public void setCurrentCollectionNameAdmin(String collectionNameAdmin) {
+		System.setProperty("collectionNameAdmin", collectionNameAdmin);
+	}
+	
+	public String getCurrentCollectionNameAdmin() {
+		return System.getProperty("collectionNameAdmin");
+	}
+	
+	public void create(String name) {
+		
+		URI uri;
+		try {
+			uri = new URIBuilder() //
+					.setScheme("http") //
+					.setHost(System.getProperty("solrAddress")) //
+					.setPath("/solr/admin/collections") //
+					.setParameter("action", "CREATE") //
+					.setParameter("name", name) //
+					.setParameter("numShards", "1") //
+//					.setParameter("replicationFactor", "1") //
+					.setParameter("collection.configName", "_default") //
+					.build();
+			JSONObject json = con.get(uri);
+		} catch (URISyntaxException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 }
