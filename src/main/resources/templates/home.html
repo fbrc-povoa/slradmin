@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+	layout:decorate="~{layouts/default}">
+
+<body>
+	<section layout:fragment="navbar" th:remove="tag">
+		<div th:replace="fragments/navbar :: navbar('home')"
+			th:remove="tag"></div>
+	</section>
+	<section layout:fragment="content" th:remove="tag">
+		<div class="container-fluid">
+			<a th:href="@{/connect}">Conectar Solr</div>
+		</div>
+	</section>
+</body>
+</html>

@@ -1,0 +1,35 @@
+/*-----------------------------------------------------------------------------------
+Theme Name: Fabr�cio
+-----------------------------------------------------------------------------------*/
+
+.pad-t {
+	padding-top: 50px;
+}
+
+.pad-t100 {
+	padding-top: 100px;
+}
+
+
+.espaco {
+	padding-top: 20px;
+}
+
+.titulo{
+	color: #ff36bd;
+	font-family: sans-serif;
+}
+
+.tituloModal{
+	color: #004085;
+}
+
+.tituloSejaUmParceiro{
+	color: #004691;
+}
+
+
+
+.fontTable{
+	font-size: 14px;
+}

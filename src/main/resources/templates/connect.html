@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+	layout:decorate="~{layouts/default}">
+
+<body>
+	<section layout:fragment="navbar" th:remove="tag">
+		<div th:replace="fragments/navbar :: navbar('home')" th:remove="tag"></div>
+	</section>
+	<section layout:fragment="content" th:remove="tag">
+		<div class="container-fluid">
+			<div class="col-6">
+			<form th:object="${connection}" th:action="@{/connect}" method="post">
+				<div class="form-group">
+					<label for="exampleInputEmail1">Endereço do Solr</label> <input
+						th:field="*{address}"
+						type="text" class="form-control" id="addressSolr"
+						aria-describedby="addressSolr" placeholder="ip/dns:port"> <small
+						id="emailHelp" class="form-text text-muted">Vamos criar um conexão com o solr.</small>
+				</div>
+				<button type="submit" class="btn btn-primary">Conectar</button>
+			</form>
+			</div>
+		</div>
+	</section>
+</body>
+</html>

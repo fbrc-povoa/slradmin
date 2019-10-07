@@ -1,0 +1,15 @@
+<!doctype html>
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head th:replace="fragments/head :: head"></head>
+<body>
+	<section layout:fragment="navbar"></section>
+	<div class="container-fluid">
+		<div class="pad-t100">
+		<section layout:fragment="content"></section>
+		</div>
+	</div>
+	<div th:replace="fragments/scripts :: scripts" th:remove="tag"></div>
+</body>
+</html>
