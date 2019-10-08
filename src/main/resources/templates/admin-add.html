@@ -7,23 +7,20 @@
 
 <body>
 	<section layout:fragment="admin-content" th:remove="tag">
-		<div class="col-6">
-			<span
-				th:text="${#strings.concat('Adding value in ',collectionName,' collection')}"></span>
-
-			<span>Fields <small id="emailHelp"
-				class="form-text text-muted">Choose one of these fields.</small> <select
-				class="form-control form-control-lg" id="exampleFormControlSelect1">
-					<option th:each="opt:${fields}" th:value="${opt}" th:name="${opt}"
-						th:text="${opt}"></option>
-			</select> <br />
-			<span>Value <small id="emailHelp" class="form-text text-muted">Give
-						some value</small> <input type="text" class="form-control form-control-lg"
-					id="exampleFormControlInput1">
-					<br />
-					<button type="button" class="btn btn-success" th:onclick="'addValue()'">Add</button>
-		</div>
-
+		<span th:text="${#strings.concat('Adding value to ',collectionName,' collection')}"></span>
+		<br />
+		<span>Field </span>
+		<select	class="form-control form-control-lg" id="myField">
+			<option th:each="opt:${fields}" th:value="${opt}" th:name="${opt}"
+				th:text="${opt}"></option>
+		</select>
+		<br />
+		<span>Value </span>
+		<input type="text" class="form-control form-control-lg" id="myValue">
+		<br />
+		<button type="button" class="btn btn-light" th:onclick="'addValue()'">Add </button>
+		<button type="button" class="btn btn-light" th:onclick="'clearCollection()'">Clear </button>
+		<button type="button" class="btn btn-success">Save </button>
 	</section>
 </body>
 </html>
