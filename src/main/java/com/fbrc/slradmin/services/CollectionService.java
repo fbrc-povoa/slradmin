@@ -12,6 +12,8 @@ import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.fbrc.slradmin.exceptions.DMSAException;
+
 @Service
 public class CollectionService {
 	
@@ -23,7 +25,8 @@ public class CollectionService {
 	}
 	
 	public List<String> collectionsName() {
-		setCurrentCollectionsName();
+		findAllCollectionName();
+		hasDMSA();
 		return getCurrentCollectionsName();
 	}
 
@@ -31,7 +34,7 @@ public class CollectionService {
 		return Arrays.asList(System.getProperty("collectionsName").split(";"));
 	}
 	
-	public void setCurrentCollectionsName() {
+	public void findAllCollectionName() {
 
 		URI uri;
 		StringJoiner sj = new StringJoiner(";");
@@ -66,24 +69,21 @@ public class CollectionService {
 		return System.getProperty("collectionNameAdmin");
 	}
 	
-	public void create(String name) {
-		
-		URI uri;
-		try {
-			uri = new URIBuilder() //
-					.setScheme("http") //
-					.setHost(System.getProperty("solrAddress")) //
-					.setPath("/solr/admin/collections") //
-					.setParameter("action", "CREATE") //
-					.setParameter("name", name) //
-					.setParameter("numShards", "1") //
-//					.setParameter("replicationFactor", "1") //
-					.setParameter("collection.configName", "_default") //
-					.build();
-			JSONObject json = con.get(uri);
-		} catch (URISyntaxException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+	public void hasDMSA() {
+		List<String> collectionsNameList = Arrays.asList(System.getProperty("collectionsName").split(";"));
+		String DMSACollectionName = collectionsNameList.stream().filter(entry->entry.equalsIgnoreCase("DMSA")).findFirst().orElse(null);
+		if(DMSACollectionName == null)
+			throw new DMSAException("Collection DMSA not found!");
+	}
+	
+	public List<String> getCurrentCollectionFields(){
+		if(System.getProperty("collectionNameAdmin").equalsIgnoreCase("dmsa")) {
+			return Arrays.asList("collection_name_s","attr_fields");
+		}else {
+			//TODO
+			//Connect to DMSA collection
 		}
+		return null;
 	}
 }
+

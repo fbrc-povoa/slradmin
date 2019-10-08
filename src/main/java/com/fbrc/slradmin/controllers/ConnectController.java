@@ -8,44 +8,44 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.fbrc.slradmin.dtos.ConnectionDto;
+import com.fbrc.slradmin.exceptions.DMSAException;
 import com.fbrc.slradmin.dtos.CollectionNameSelected;
 import com.fbrc.slradmin.services.CollectionService;
 import com.fbrc.slradmin.services.ConnectionService;
 
 @Controller
 public class ConnectController {
-	
+
 	private ConnectionDto dto;
 	private ConnectionService connectionService;
 	private CollectionService collectionService;
-	
+
 	@Autowired
 	public ConnectController(ConnectionDto dto, //
 			ConnectionService connectionService, //
-			CollectionService collectionService ) {
-		this.dto=dto;
-		this.connectionService=connectionService;
-		this.collectionService=collectionService;
+			CollectionService collectionService) {
+		this.dto = dto;
+		this.connectionService = connectionService;
+		this.collectionService = collectionService;
 	}
 
-	@GetMapping("/connect")
+	@GetMapping(path= {"/","/connect"})
 	public String connect(Model model) {
 		model.addAttribute("connection", dto);
 		return "connect";
 	}
-	
+
 	@PostMapping("/connect")
 	public String connect(Model model, ConnectionDto connection) throws JSONException {
-		
-		if(connectionService.start(connection)) {
-			model.addAttribute("connection_address", connection.getAddress());
+
+		if (connectionService.start(connection)) {
 			model.addAttribute("collectionsName", collectionService.collectionsName());
+			model.addAttribute("connection_address", connection.getAddress());
 			model.addAttribute("optSelected", new CollectionNameSelected());
 			return "connected";
-		} else {
-			model.addAttribute("connection", dto);
-			return "connect";
 		}
-		
+
+		model.addAttribute("connection", dto);
+		return "connect";
 	}
 }

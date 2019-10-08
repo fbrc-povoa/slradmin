@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+	layout:decorate="~{admin}">
+
+<body>
+	<section layout:fragment="admin-content" th:remove="tag">
+		<div class="col-6">
+			<span
+				th:text="${#strings.concat('Adding value in ',collectionName,' collection')}"></span>
+
+			<span>Fields <small id="emailHelp"
+				class="form-text text-muted">Choose one of these fields.</small> <select
+				class="form-control form-control-lg" id="exampleFormControlSelect1">
+					<option th:each="opt:${fields}" th:value="${opt}" th:name="${opt}"
+						th:text="${opt}"></option>
+			</select> <br />
+			<span>Value <small id="emailHelp" class="form-text text-muted">Give
+						some value</small> <input type="text" class="form-control form-control-lg"
+					id="exampleFormControlInput1">
+					<br />
+					<button type="button" class="btn btn-success" th:onclick="'addValue()'">Add</button>
+		</div>
+
+	</section>
+</body>
+</html>

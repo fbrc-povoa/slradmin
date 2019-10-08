@@ -11,9 +11,7 @@
 				<option th:each="opt:${collectionsName}" th:text="${opt}"
 					th:value="${opt}"></option>
 			</select>
-			<button type="submit" class="btn btn-success">Admin
+			<button type="submit" class="btn btn-success">Manage
 				Collection</button>
-			<a th:href="@{/admin/collection/new}" class="btn btn-light">Add
-				New Collection</a>
 		</form>
 </div>

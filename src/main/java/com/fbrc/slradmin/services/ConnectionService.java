@@ -22,34 +22,14 @@ public class ConnectionService {
 
 	public boolean start(final ConnectionDto dto) throws JSONException {
 		setProperties(dto.getAddress());
-		return test();
+		return testConnection().getStatusLine().getStatusCode() == 200;
+		 
 	}
 
 	public void setProperties(final String address) {
 		System.setProperty("solrAddress", address);
 	}
 
-	public boolean test() {
-		try {
-			URI uri = new URIBuilder() //
-					.setScheme("http") //
-					.setHost(System.getProperty("solrAddress")) //
-					.setPath("/solr/admin/collections") //
-					.setParameter("action", "LIST") //
-					.setParameter("wt", "json") //
-					.build();
-			JSONObject json = get(uri);
-			if (json != null) {
-				return true;
-			} else {
-				return false;
-			}
-		} catch (URISyntaxException e) {
-			e.printStackTrace();
-			return false;
-		}
-	}
-	
 	public JSONObject get(URI uri) {
 
 		HttpGet httpget = new HttpGet(uri);
@@ -68,6 +48,24 @@ public class ConnectionService {
 			e1.printStackTrace();
 			return null;
 		}
+	}
+
+	public CloseableHttpResponse testConnection() {
+		try {
+			URI uri = new URIBuilder() //
+					.setScheme("http") //
+					.setHost(System.getProperty("solrAddress")) //
+					.setPath("/solr/admin/collections") //
+					.setParameter("action", "LIST") //
+					.setParameter("wt", "json") //
+					.build();
+			HttpGet httpget = new HttpGet(uri);
+			CloseableHttpClient httpclient = HttpClients.createDefault(); //
+			return httpclient.execute(httpget);
+		} catch (IOException | URISyntaxException e) {
+			e.printStackTrace();
+			return null;
+		} //
 	}
 
 }

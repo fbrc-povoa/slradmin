@@ -7,15 +7,18 @@
 
 <body>
 	<section layout:fragment="navbar" th:remove="tag">
-		<div th:replace="fragments/navbar :: navbar('home')"
-			th:remove="tag"></div>
+		<div th:replace="fragments/navbar :: navbar('home')" th:remove="tag"></div>
 	</section>
 	<section layout:fragment="content" th:remove="tag">
 		<div class="container-fluid">
-<!-- 			<a th:href="@{/connect}">Conectar Solr</div> -->
-			<span>Wich SolrCloud Instance do you want
-			<a th:href="@{/connect}" class="btn btn-primary">connect to</a> ?
-			</span>
+			<div class="row">
+				<div class="col-3">
+					<span class="text-danger font-weight-bold">
+					DMSA Collection Not Found!
+					</span><br/>
+					You should create a new collection named "DMSA". No needed static fields, except id, root and version.
+				</div>
+			</div>
 		</div>
 	</section>
 </body>

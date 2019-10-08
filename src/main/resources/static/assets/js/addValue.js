@@ -1,0 +1,3 @@
+function addValue() {
+	alert('Fabricio')
+}
